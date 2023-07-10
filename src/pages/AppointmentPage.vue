@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <!-- content -->
+    APPOINTMENT
   </q-page>
 </template>
 

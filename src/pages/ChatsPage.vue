@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <!-- content -->
+    CHATS
   </q-page>
 </template>
 

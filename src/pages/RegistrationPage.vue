@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <!-- content -->
+    REGISTRATION
   </q-page>
 </template>
 
