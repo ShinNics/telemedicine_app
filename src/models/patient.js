@@ -1,79 +1,69 @@
-export const createFields = (overrides = []) =>
-  createInputFields(model, overrides);
+import { QInput, QSelect, QDate } from "quasar";
+import { createInputFields } from "./functions";
+import CustomInput from "components/CustomInput.vue";
 
+const model = [
+  {
+    component: QInput,
+    model: "last_name",
+    attrs: {
+      label: "Last Name",
+    },
+    col: 4,
+  },
+  {
+    component: QInput,
+    model: "first_name",
+    attrs: {
+      label: "First Name",
+    },
+    col: 4,
+  },
+  {
+    component: QInput,
+    model: "middle_name",
+    attrs: {
+      label: "Middle Name",
+    },
+    col: 4,
+  },
+  {
+    component: QSelect,
+    model: "suffix_name",
+    attrs: {
+      label: "Suffix Name",
+      options: ["Jr.", "Sr."],
+    },
+    col: 2,
+  },
+  {
+    component: QSelect,
+    model: "sex",
+    attrs: {
+      label: "Sex",
+      options: ["Male", "Female"],
+    },
+    col: 2,
+  },
+  {
+    component: CustomInput,
+    model: "birth_date",
+    attrs: {
+      label: "Date of Birth",
+      mask: "####-##-##",
+      placeholder: "YYYY-MM-DD",
+    },
+    col: 4,
+    format: (val) => (val ? new Date(val).toDateString() : ""),
+  },
+  {
+    component: QInput,
+    model: "contact_no",
+    attrs: {
+      label: "Contact No.",
+    },
+    col: 4,
+  },
+];
 
-// from step #5
-export const createPatient = (data) => {
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      let patients = JSON.parse(localStorage.getItem("patients") || "[]");
-      data.id = patients.length + 1;
-      patients.push(data);
-      localStorage.setItem("patients", JSON.stringify(patients));
-      resolve(data);
-    }, 1000);
-  });
-};
-
-// from step 6
-// export const createPatient = (data) => {
-//   return new Promise((resolve) => {
-//     setTimeout(async () => {
-//       let patients = await getPatients();
-//       data.id = patients.length + 1;
-//       patients.push(data);
-//       localStorage.setItem("patients", JSON.stringify(patients));
-//       resolve(data);
-//     }, 1000);
-//   });
-// };
-export const getPatients = () => {
-  return new Promise((resolve) => {
-    setTimeout(function () {
-      resolve(JSON.parse(localStorage.getItem("patients") || "[]"));
-    }, 1000);
-  });
-};
-// export const updatePatient = async (id, data) => {
-//   // return new Promise((resolve, reject) => {
-//   //   setTimeout(async () => {
-//   //     let patients = await getPatients();
-
-//   //     let index = patients.findIndex((patient) => patient.id === id);
-//   //     if (index === -1) {
-//   //       reject("Patient not found");
-//   //       return;
-//   //     }
-
-//   //     patients[index] = { ...patients[index], ...data };
-//   //     localStorage.setItem("patients", JSON.stringify(patients));
-//   //     resolve(patients[index]);
-//   //   }, 1000);
-//   // });
-
-//   await setDoc(doc(db, "patients", id), data);
-
-//   return id
-// };
-
-// export const deletePatient = async (id) => {
-//   // return new Promise((resolve, reject) => {
-//   //   setTimeout(async () => {
-//   //     let patients = await getPatients();
-
-//   //     let index = patients.findIndex((patient) => patient.id === id);
-//   //     if (index === -1) {
-//   //       reject("Patient not found");
-//   //       return;
-//   //     }
-
-//   //     patients.splice(index, 1);
-//   //     localStorage.setItem("patients", JSON.stringify(patients));
-//   //     resolve(patients[index]);
-//   //   }, 1000);
-//   // });
-
-//   await deleteDoc(doc(db, "patients", id));
-
-//   return id
-// };
+export const createFields = () => createInputFields(model);

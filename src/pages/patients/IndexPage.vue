@@ -1,39 +1,13 @@
 <script setup>
-import { ref, watch } from "vue";
-import AddEditDialog from "pages/patients/AddEditDialog.vue";
+import FormBuilder from "components/FormBuilder.vue";
+import { createFields } from "src/models/patient.js";
+import { computed } from "vue";
 
-
-const dialog = ref(false);
-const selectedPatient = ref({});
-
-watch(dialog, (value) => {
-  if (!value) {
-    selectedPatient.value = {};
-  }
-});
+const fields = computed(() => createFields());
 </script>
 
 <template>
   <q-page padding>
-    <q-card flat bordered>
-      <q-toolbar flat>
-        <q-toolbar-title> Patients </q-toolbar-title>
-
-        <q-btn
-          flat
-          round
-          dense
-          icon="add"
-          color="primary"
-          @click="dialog = true"
-        />
-      </q-toolbar>
-      <q-separator />
-    </q-card>
-
-    <AddEditDialog
-      v-model="dialog"
-      v-model:selected-patient="selectedPatient"
-    />
+    <FormBuilder :fields="fields" />
   </q-page>
 </template>
